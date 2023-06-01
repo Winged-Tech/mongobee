@@ -96,8 +96,8 @@ public class Mongobee implements InitializingBean {
   }
 
   public Mongobee(MongoClient mongoClient, boolean enableAcquireLock) {
-    final Mongobee mongobee = new Mongobee(mongoClient);
-    mongobee.enableAcquireLock = enableAcquireLock;
+    this(mongoClient);
+    this.enableAcquireLock = enableAcquireLock;
   }
 
   /**

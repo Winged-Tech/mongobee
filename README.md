@@ -25,9 +25,9 @@ The goal is to keep this tool simple and comfortable to use.
 With Maven
 ```xml
 <dependency>
-  <groupId>com.github.dalet-oss</groupId>
+  <groupId>com.winged-tech</groupId>
   <artifactId>mongobee</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 With Gradle
