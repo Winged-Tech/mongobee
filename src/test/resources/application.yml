@@ -1,0 +1,4 @@
+winged:
+  config:
+    mongobee:
+      enableAcquireLock: false

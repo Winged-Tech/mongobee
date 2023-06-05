@@ -26,6 +26,7 @@ import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
+import com.github.mongobee.config.MongobeeConfiguration;
 
 /**
  * Mongobee runner
@@ -46,7 +47,7 @@ public class Mongobee implements InitializingBean {
   private ChangeEntryDao dao;
 
   private boolean enabled = true;
-  private boolean enableAcquireLock = true;
+  private Boolean enableAcquireLock = MongobeeConfiguration.getConfigProperties().getEnableAcquireLock();
   private String changeLogsScanPackage;
   private MongoClientURI mongoClientURI;
   private MongoClient mongoClient;
@@ -98,6 +99,10 @@ public class Mongobee implements InitializingBean {
   public Mongobee(MongoClient mongoClient, boolean enableAcquireLock) {
     this(mongoClient);
     this.enableAcquireLock = enableAcquireLock;
+  }
+
+  public boolean isEnableAcquireLock() {
+    return this.enableAcquireLock != null ? this.enableAcquireLock : true;
   }
 
   /**
@@ -158,7 +163,7 @@ public class Mongobee implements InitializingBean {
       dao.connectMongoDb(this.mongoClientURI, dbName);
     }
 
-    if (enableAcquireLock && !dao.acquireProcessLock()) {
+    if (isEnableAcquireLock() && !dao.acquireProcessLock()) {
       logger.info("Mongobee did not acquire process lock. Exiting.");
       return;
     }
@@ -169,7 +174,7 @@ public class Mongobee implements InitializingBean {
       executeMigration();
     } finally {
       logger.info("Mongobee is releasing process lock.");
-      if (enableAcquireLock) {
+      if (isEnableAcquireLock()) {
         dao.releaseProcessLock();
       }
     }
