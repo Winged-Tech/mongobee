@@ -26,7 +26,7 @@ import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
-import com.github.mongobee.config.MongobeeConfiguration;
+import com.github.mongobee.config.MongobeeLockConfiguration;
 
 /**
  * Mongobee runner
@@ -47,7 +47,7 @@ public class Mongobee implements InitializingBean {
   private ChangeEntryDao dao;
 
   private boolean enabled = true;
-  private Boolean enableAcquireLock = MongobeeConfiguration.getConfigProperties().getEnableAcquireLock();
+  private Boolean enableAcquireLock = MongobeeLockConfiguration.getConfigProperties().getEnableAcquireLock();
   private String changeLogsScanPackage;
   private MongoClientURI mongoClientURI;
   private MongoClient mongoClient;

@@ -1,17 +1,20 @@
 package com.github.mongobee.config;
 
+import com.github.mongobee.Mongobee;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableConfigurationProperties(MongobeeConfigurationProperties.class)
-public class MongobeeConfiguration {
+@AutoConfigureBefore(Mongobee.class)
+public class MongobeeLockConfiguration {
 
   private MongobeeConfigurationProperties properties;
 
-  private static MongobeeConfiguration configuration;
+  private static MongobeeLockConfiguration configuration;
 
-  public MongobeeConfiguration(MongobeeConfigurationProperties properties) {
+  public MongobeeLockConfiguration(MongobeeConfigurationProperties properties) {
     this.properties = properties;
     configuration = this;
   }

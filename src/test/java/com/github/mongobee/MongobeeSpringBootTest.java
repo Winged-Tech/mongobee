@@ -1,7 +1,7 @@
 package com.github.mongobee;
 
-import com.github.mongobee.config.MongobeeConfiguration;
 import com.github.mongobee.config.MongobeeConfigurationProperties;
+import com.github.mongobee.config.MongobeeLockConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -18,11 +18,9 @@ import org.springframework.test.context.junit4.SpringRunner;
     , MongoReactiveDataAutoConfiguration.class})
 public class MongobeeSpringBootTest {
 
-  private MongobeeConfiguration mongobeeConfiguration;
-
   @Test
   public void mongobeeTest() {
-    MongobeeConfigurationProperties configProperties = mongobeeConfiguration.getConfigProperties();
+    MongobeeConfigurationProperties configProperties = MongobeeLockConfiguration.getConfigProperties();
     Mongobee mongobee = new Mongobee();
     System.out.println("mongobee config is enable acquire lock: " + configProperties.getEnableAcquireLock());
     System.out.println("mongobee is enable acquire lock: " + mongobee.isEnableAcquireLock());

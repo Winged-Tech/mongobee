@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.github.mongobee.config.MongobeeConfiguration
+  com.github.mongobee.config.MongobeeLockConfiguration
