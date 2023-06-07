@@ -8,10 +8,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import com.github.mongobee.config.MongobeeLockConfigurationProperties;
 import org.jongo.Jongo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
@@ -47,7 +49,7 @@ public class Mongobee implements InitializingBean {
   private ChangeEntryDao dao;
 
   private boolean enabled = true;
-  private Boolean enableAcquireLock = MongobeeLockConfiguration.getConfigProperties().getEnableAcquireLock();
+  private Boolean enableAcquireLock;
   private String changeLogsScanPackage;
   private MongoClientURI mongoClientURI;
   private MongoClient mongoClient;
@@ -56,6 +58,9 @@ public class Mongobee implements InitializingBean {
 
   private MongoTemplate mongoTemplate;
   private Jongo jongo;
+
+  @Autowired
+  private MongobeeLockConfigurationProperties properties;
 
 
   /**
@@ -102,6 +107,9 @@ public class Mongobee implements InitializingBean {
   }
 
   public boolean isEnableAcquireLock() {
+    if (properties != null && properties.getEnableAcquireLock() != null) {
+      return properties.getEnableAcquireLock();
+    }
     return this.enableAcquireLock != null ? this.enableAcquireLock : true;
   }
 

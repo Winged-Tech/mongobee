@@ -3,7 +3,7 @@ package com.github.mongobee.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties("winged.config.mongobee")
-public class MongobeeConfigurationProperties {
+public class MongobeeLockConfigurationProperties {
 
   private Boolean enableAcquireLock;
 
